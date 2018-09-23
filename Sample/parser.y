@@ -19,12 +19,30 @@
 
 %define api.value.type { double }
 
-%token NUM
+%token NUM WHILE DO ALLAV CLLAV FINLIN
+%start instrucciones 
 
 %left '-' '+'
 %left '*' '/'
 
 %%		/* the grammars here */
+
+instrucciones : instruccion | instrucciones;
+instruccion : dowhile FINLIN 
+			| NUM FINLIN { cout << " =>" << $1 << endl; }
+			;
+
+dowhile : dowhilesing | dowhilemult;
+dowhilesing : DO
+			  instruccion	
+			  WHILE '(' condicion ')'
+			  ;
+dowhilemult : DO ALLAV
+			  instrucciones	
+			  CLLAV WHILE '(' condicion ')'
+			  ;
+
+condicion : NUM;
 
 input: %empty
 	| input line
