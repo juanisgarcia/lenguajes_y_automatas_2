@@ -1,6 +1,6 @@
-#line 1 "lexer.cpp"
+#line 1 "flaxer.cpp"
 
-#line 3 "lexer.cpp"
+#line 3 "flaxer.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -552,8 +552,8 @@ char *yytext;
 
 	#include "parser.h"
 
-#line 555 "lexer.cpp"
-#line 556 "lexer.cpp"
+#line 555 "flaxer.cpp"
+#line 556 "flaxer.cpp"
 
 #define INITIAL 0
 
@@ -778,7 +778,7 @@ YY_DECL
 #line 18 "lexer.l"
 
 
-#line 781 "lexer.cpp"
+#line 781 "flaxer.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -916,7 +916,7 @@ YY_RULE_SETUP
 #line 39 "lexer.l"
 ECHO;
 	YY_BREAK
-#line 919 "lexer.cpp"
+#line 919 "flaxer.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

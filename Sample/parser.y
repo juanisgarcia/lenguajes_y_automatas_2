@@ -47,11 +47,11 @@ while : WHILE
 			
 dowhile : DO		
 		  instrucciones	
-		  WHILE '(' condicion ')' FINLIN
+		  WHILE '(' condicion ')' FINLIN {cout <<"Do while de una sola instrucción"<<endl;}
 		  |
 		  DO ALLAV
 		  instrucciones	
-		  CLLAV WHILE '(' condicion ')' FINLIN
+		  CLLAV WHILE '(' condicion ')' FINLIN {cout <<"Do while de una muchas instrucciones"<<endl;}
 		  ;
 
 switch : SWITCH '(' identificador ')'ALLAV
@@ -60,7 +60,7 @@ switch : SWITCH '(' identificador ')'ALLAV
 		CLLAV;
 cases: cases CASE NUM ':'
 		instrucciones
-		BREAK FINLIN
+		BREAK FINLIN {cout <<"esto es un switch";}
 		|
 		%empty;
 default: DEFAULT ':'
@@ -83,3 +83,4 @@ exp: NUM		   { $$ = $1; }
 	;
 
 %%
+

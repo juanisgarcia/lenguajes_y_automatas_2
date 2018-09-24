@@ -1,2 +1,11 @@
-switch (8){
-case 2 : break;}
+do{ 
+    switch (8)
+    {
+        case 2 : 
+            do
+                5 + 4;
+            while(56);
+            20 + 15;
+        break;
+    }
+}while(76);

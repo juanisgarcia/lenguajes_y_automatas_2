@@ -27,7 +27,6 @@ NUMB	([0-9]+)|([0-9]*\.[0-9]+)
 "break"			{return BREAK;}
 "default"		{return DEFAULT;}
 
-
 "{"			{ return ALLAV; }
 "}"			{ return CLLAV; }
 ";"			{ return FINLIN; }
