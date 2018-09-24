@@ -19,7 +19,7 @@
 
 %define api.value.type { double }
 
-%token NUM WHILE DO ALLAV CLLAV FINLIN
+%token NUM WHILE DO ALLAV CLLAV FINLIN SWITCH CASE BREAK DEFAULT
 %start instrucciones 
 
 %left '-' '+'
@@ -28,10 +28,11 @@
 %%		/* the grammars here */
 
 instrucciones: %empty
-	   | instrucciones line
+	   | instrucciones instruccion
 	   ;
 
 instruccion : dowhile  
+		| switch 
 			| line
 			;
 
@@ -44,10 +45,24 @@ dowhile : DO
 		  CLLAV WHILE '(' condicion ')' FINLIN
 		  ;
 
-condicion : NUM;
+switch : SWITCH '(' identificador ')'ALLAV
+		cases
+		default
+		CLLAV;
+cases: cases CASE NUM ':'
+		instrucciones
+		BREAK FINLIN
+		|
+		%empty;
+default: DEFAULT ':'
+		instrucciones
+		|
+		%empty;
 
-line: '\n'
-	| exp '\n'	{ cout << " =>" << $1 << endl; }
+condicion : NUM;
+identificador : NUM;
+
+line: exp FINLIN { cout << " =>" << $1 << endl; }
 	; 
 
 exp: NUM		   { $$ = $1; }
