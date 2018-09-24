@@ -30,13 +30,22 @@
 instrucciones: %empty
 	   | instrucciones instruccion
 	   ;
-
+instruccion : while  
+			| line
+			;
 instruccion : dowhile  
 		| switch 
 			| line
 			;
-
-dowhile : DO
+while : WHILE
+		  	
+		   '(' condicion ')' 
+			 ALLAV
+		  		instrucciones	
+		 	 CLLAV
+			;
+			
+dowhile : DO		
 		  instrucciones	
 		  WHILE '(' condicion ')' FINLIN
 		  |
