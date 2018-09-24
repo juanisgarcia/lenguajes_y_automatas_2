@@ -1,4 +1,4 @@
-%defines "parser.h"
+﻿%defines "parser.h"
 
 %{
 	#include <cmath>
@@ -30,12 +30,11 @@
 instrucciones: %empty
 	   | instrucciones instruccion
 	   ;
-instruccion : while  
-			| line
-			;
+
 instruccion : dowhile  
 		| switch 
 			| line
+			| WHILE
 			;
 while : WHILE
 		  	
