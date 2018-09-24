@@ -27,26 +27,24 @@
 
 %%		/* the grammars here */
 
-instrucciones : instruccion | instrucciones;
-instruccion : dowhile FINLIN 
-			| NUM FINLIN { cout << " =>" << $1 << endl; }
+instrucciones: %empty
+	   | instrucciones line
+	   ;
+
+instruccion : dowhile  
+			| line
 			;
 
-dowhile : dowhilesing | dowhilemult;
-dowhilesing : DO
-			  instruccion	
-			  WHILE '(' condicion ')'
-			  ;
-dowhilemult : DO ALLAV
-			  instrucciones	
-			  CLLAV WHILE '(' condicion ')'
-			  ;
+dowhile : DO
+		  instrucciones	
+		  WHILE '(' condicion ')' FINLIN
+		  |
+		  DO ALLAV
+		  instrucciones	
+		  CLLAV WHILE '(' condicion ')' FINLIN
+		  ;
 
 condicion : NUM;
-
-input: %empty
-	| input line
-	;
 
 line: '\n'
 	| exp '\n'	{ cout << " =>" << $1 << endl; }
