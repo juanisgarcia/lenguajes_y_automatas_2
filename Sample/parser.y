@@ -1,12 +1,12 @@
-﻿%defines "parser.h"
+﻿
+%defines "parser.h"
 
 %{
 	#include <cmath>
 	#include <cstdio>
 	#include <iostream>
 
-	#pragma warning (disable: 4005)
-	
+
 	// this function will be generated
 	// by flex
 	extern int yylex(); // lexical analyzer
@@ -19,7 +19,7 @@
 
 %define api.value.type { double }
 
-%token NUM WHILE DO ALLAV CLLAV FINLIN SWITCH CASE BREAK DEFAULT
+%token NUM WHILE DO ALLAV CLLAV FINLIN SWITCH CASE BREAK DEFAULT FOR INCPOS INCNEG
 %start instrucciones 
 
 %left '-' '+'
@@ -35,6 +35,7 @@ instruccion : dowhile
 		| switch 
 			| line
 			| while
+                        | for
 			;
 while : WHILE
 		  	
@@ -67,12 +68,20 @@ default: DEFAULT ':'
 		|
 		%empty;
 
+for : 				 
+		 FOR  '('asignacion FINLIN condicion FINLIN incremento')'  
+                 ALLAV
+		 instrucciones
+	         CLLAV {cout << "Esto es un ciclo for"<< endl;}
+
+asignacion:NUM;
+incremento:identificador INCPOS | identificador INCNEG ;
+                          			  
 condicion : NUM;
 identificador : NUM;
 
 line: exp FINLIN { cout << " =>" << $1 << endl; }
 	; 
-
 exp: NUM		   { $$ = $1; }
 	| exp '+' exp  { $$ = $1 + $3; }
 	| exp '-' exp  { $$ = $1 - $3; }
@@ -82,4 +91,6 @@ exp: NUM		   { $$ = $1; }
 	;
 
 %%
+
+
 
