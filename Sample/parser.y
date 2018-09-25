@@ -34,7 +34,7 @@ instrucciones: %empty
 instruccion : dowhile  
 		| switch 
 			| line
-			| WHILE
+			| while
 			;
 while : WHILE
 		  	
