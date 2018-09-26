@@ -1,4 +1,3 @@
-﻿
 %defines "parser.h"
 
 %{
@@ -6,7 +5,8 @@
 	#include <cstdio>
 	#include <iostream>
 
-
+	#pragma warning (disable: 4005)
+	
 	// this function will be generated
 	// by flex
 	extern int yylex(); // lexical analyzer
@@ -32,35 +32,34 @@ instrucciones: %empty
 	   ;
 
 instruccion : dowhile  
-		| switch 
+			| switch 
 			| line
 			| while
-                        | for
+			| for
 			;
-while : WHILE
-		  	
-		   '(' condicion ')' 
-			 ALLAV
-		  		instrucciones	
-		 	 CLLAV
-			;
-			
-dowhile : DO		
+
+while : WHILE '(' condicion ')'
+		ALLAV
+			instrucciones
+		CLLAV {cout << "Es un While"<<endl;}
+		;
+
+dowhile : DO
 		  instrucciones	
-		  WHILE '(' condicion ')' FINLIN {cout <<"Do while de una sola instrucción"<<endl;}
+		  WHILE '(' condicion ')' FINLIN {cout << "Do while de una sola instrucción"<<endl;}
 		  |
 		  DO ALLAV
 		  instrucciones	
-		  CLLAV WHILE '(' condicion ')' FINLIN {cout <<"Do while de una muchas instrucciones"<<endl;}
+		  CLLAV WHILE '(' condicion ')' FINLIN {cout << "Do while de muchas instrucciones"<<endl;}
 		  ;
 
 switch : SWITCH '(' identificador ')'ALLAV
 		cases
 		default
-		CLLAV;
+		CLLAV {cout<<"esto es un switch"<<endl;};
 cases: cases CASE NUM ':'
 		instrucciones
-		BREAK FINLIN {cout <<"esto es un switch";}
+		BREAK FINLIN
 		|
 		%empty;
 default: DEFAULT ':'
@@ -68,20 +67,20 @@ default: DEFAULT ':'
 		|
 		%empty;
 
-for : 				 
-		 FOR  '('asignacion FINLIN condicion FINLIN incremento')'  
-                 ALLAV
-		 instrucciones
-	         CLLAV {cout << "Esto es un ciclo for"<< endl;}
+for : FOR '(' asignacion FINLIN condicion FINLIN incremento ')'
+	  ALLAV
+	  instrucciones
+	  CLLAV {cout << "Esto es un ciclo for"<<endl;}
 
-asignacion:NUM;
-incremento:identificador INCPOS | identificador INCNEG ;
-                          			  
+asignacion : NUM;
+incremento : identificador INCPOS | identificador INCNEG;
+
 condicion : NUM;
 identificador : NUM;
 
 line: exp FINLIN { cout << " =>" << $1 << endl; }
 	; 
+
 exp: NUM		   { $$ = $1; }
 	| exp '+' exp  { $$ = $1 + $3; }
 	| exp '-' exp  { $$ = $1 - $3; }
@@ -91,6 +90,3 @@ exp: NUM		   { $$ = $1; }
 	;
 
 %%
-
-
-

@@ -1,11 +1,13 @@
-do{ 
-    switch (8)
-    {
-        case 2 : 
-            do
-                5 + 4;
-            while(56);
-            20 + 15;
-        break;
-    }
-}while(76);
+switch(89){
+    case 1:
+        do{
+            while(87){
+                for(65;67;77++){
+                    4 + 5;
+                }
+            }
+        }while(88);
+    break;
+    default:
+        24 + 5;
+}

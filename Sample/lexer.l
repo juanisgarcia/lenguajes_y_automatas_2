@@ -18,7 +18,6 @@ NUMB	([0-9]+)|([0-9]*\.[0-9]+)
 %%
 
 {NUMB}			{ yylval = atof(yytext); return NUM; }
-
 [+*/()-:]		{ return yytext[0]; }
 
 "while"			{return WHILE;}
@@ -27,10 +26,9 @@ NUMB	([0-9]+)|([0-9]*\.[0-9]+)
 "case"			{return CASE;}
 "break"			{return BREAK;}
 "default"		{return DEFAULT;}
-
-"for"                   {return FOR;}
-"++"                    {return INCPOS;}
-"--"                    {return INCNEG;}
+"for"			{return FOR;}
+"++"			{return INCPOS;}
+"--"			{return INCNEG;}
 
 "{"			{ return ALLAV; }
 "}"			{ return CLLAV; }
